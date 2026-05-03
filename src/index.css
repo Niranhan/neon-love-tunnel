@@ -264,6 +264,86 @@
   to { opacity: 0; transform: scale(1.15); filter: blur(20px); visibility: hidden; }
 }
 
+/* ============================================
+   START SCREEN SHIMMER + AURA
+   ============================================ */
+.aura {
+  position: absolute;
+  inset: -40%;
+  background: conic-gradient(from 0deg,
+    hsl(var(--love-pink) / 0.0),
+    hsl(var(--love-pink) / 0.35),
+    hsl(var(--love-red) / 0.45),
+    hsl(var(--love-pink-glow) / 0.35),
+    hsl(var(--love-pink) / 0.0));
+  filter: blur(60px);
+  animation: spin 22s linear infinite;
+  pointer-events: none;
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.shimmer {
+  background: linear-gradient(110deg,
+    hsl(var(--love-white)) 0%,
+    hsl(var(--love-pink)) 30%,
+    hsl(var(--love-white)) 50%,
+    hsl(var(--love-pink-glow)) 70%,
+    hsl(var(--love-white)) 100%);
+  background-size: 250% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: shimmerMove 6s ease-in-out infinite;
+  filter: drop-shadow(0 0 20px hsl(var(--love-pink) / 0.5));
+}
+@keyframes shimmerMove {
+  0%, 100% { background-position: 0% 50%; }
+  50%      { background-position: 100% 50%; }
+}
+
+/* ============================================
+   PARALLAX FLOAT (gentle 3D drift)
+   ============================================ */
+.parallax-slow {
+  animation: parallaxFloat 9s ease-in-out infinite;
+}
+.parallax-fast {
+  animation: parallaxFloat 5s ease-in-out infinite;
+}
+@keyframes parallaxFloat {
+  0%, 100% { transform: translateY(0) translateX(0); }
+  50%      { transform: translateY(-18px) translateX(10px); }
+}
+
+/* ============================================
+   PAGE FADE-IN AFTER START
+   ============================================ */
+.page-enter {
+  animation: pageIn 1.6s cubic-bezier(.2,.7,.2,1) both;
+}
+@keyframes pageIn {
+  from { opacity: 0; transform: scale(1.06) translateY(20px); filter: blur(12px); }
+  to   { opacity: 1; transform: none; filter: blur(0); }
+}
+
+/* ============================================
+   GLOW DIVIDER LINE
+   ============================================ */
+.glow-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, hsl(var(--love-pink) / 0.7), transparent);
+  box-shadow: 0 0 18px hsl(var(--love-pink) / 0.6);
+}
+
+/* Reduce motion — accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .fall-column, .heart, .particle, .blob, .beat, .love-note, .aura, .shimmer, .parallax-slow, .parallax-fast {
+    animation: none !important;
+  }
+}
+
 /* Hide scrollbar aesthetic but keep functionality */
 ::-webkit-scrollbar { width: 8px; }
 ::-webkit-scrollbar-track { background: transparent; }
