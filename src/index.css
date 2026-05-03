@@ -2,104 +2,272 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* ============================================
+   ROMANTIC 3D LOVE PAGE — DESIGN SYSTEM
+   All colors HSL. Customize via CSS variables.
+   ============================================ */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* shadcn tokens (kept for compatibility) */
+    --background: 330 40% 4%;
+    --foreground: 340 100% 96%;
+    --card: 330 40% 6%;
+    --card-foreground: 340 100% 96%;
+    --popover: 330 40% 6%;
+    --popover-foreground: 340 100% 96%;
+    --primary: 340 90% 65%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 330 30% 12%;
+    --secondary-foreground: 340 100% 96%;
+    --muted: 330 20% 14%;
+    --muted-foreground: 340 30% 75%;
+    --accent: 350 100% 70%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 340 40% 20%;
+    --input: 340 40% 20%;
+    --ring: 340 90% 65%;
+    --radius: 1.25rem;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    /* ===== Romantic theme tokens (customize me) ===== */
+    --love-text: "I love you bbe♡";
+    --love-pink: 340 100% 78%;
+    --love-pink-glow: 330 100% 70%;
+    --love-red: 350 95% 60%;
+    --love-white: 0 0% 100%;
+    --love-bg-1: 330 60% 5%;
+    --love-bg-2: 280 50% 4%;
+    --love-bg-3: 0 0% 0%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --fall-speed: 14s;       /* falling text duration */
+    --photo-size: 280px;     /* desktop photo card size */
+    --photo-size-mobile: 220px;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    --glow-soft: 0 0 20px hsl(var(--love-pink) / 0.6),
+                 0 0 40px hsl(var(--love-pink-glow) / 0.4);
+    --glow-strong: 0 0 12px hsl(var(--love-white) / 0.9),
+                   0 0 28px hsl(var(--love-pink) / 0.85),
+                   0 0 60px hsl(var(--love-pink-glow) / 0.6);
+    --glow-heart: 0 0 12px hsl(var(--love-red) / 0.9),
+                  0 0 30px hsl(var(--love-red) / 0.6);
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
-
-    --radius: 0.5rem;
-
-    --sidebar-background: 0 0% 98%;
-
-    --sidebar-foreground: 240 5.3% 26.1%;
-
-    --sidebar-primary: 240 5.9% 10%;
-
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
-  }
-
-  .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --glass-bg: linear-gradient(135deg,
+                  hsl(var(--love-pink) / 0.08),
+                  hsl(var(--love-pink-glow) / 0.04));
+    --glass-border: 1px solid hsl(var(--love-pink) / 0.25);
+    --glass-shadow: 0 20px 60px -10px hsl(var(--love-pink-glow) / 0.35),
+                    inset 0 1px 0 hsl(var(--love-white) / 0.08);
   }
 }
 
 @layer base {
-  * {
-    @apply border-border;
-  }
-
+  * { @apply border-border; }
+  html, body, #root { @apply bg-background text-foreground; }
   body {
-    @apply bg-background text-foreground;
+    font-family: 'Quicksand', 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background:
+      radial-gradient(ellipse at 20% 10%, hsl(var(--love-pink-glow) / 0.18), transparent 55%),
+      radial-gradient(ellipse at 80% 90%, hsl(var(--love-red) / 0.15), transparent 55%),
+      linear-gradient(180deg, hsl(var(--love-bg-1)), hsl(var(--love-bg-2)) 50%, hsl(var(--love-bg-3)));
+    background-attachment: fixed;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
   }
+}
+
+/* ===== Quicksand font ===== */
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&family=Dancing+Script:wght@500;700&display=swap');
+
+/* ============================================
+   FALLING LOVE TEXT
+   ============================================ */
+.fall-column {
+  position: absolute;
+  top: -10%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  font-weight: 500;
+  white-space: nowrap;
+  color: hsl(var(--love-white));
+  text-shadow: var(--glow-strong);
+  animation: fall linear infinite;
+  will-change: transform;
+  pointer-events: none;
+}
+
+@keyframes fall {
+  0%   { transform: translateY(-50%); }
+  100% { transform: translateY(110vh); }
+}
+
+/* ============================================
+   FLOATING HEARTS
+   ============================================ */
+.heart {
+  position: absolute;
+  color: hsl(var(--love-red));
+  text-shadow: var(--glow-heart);
+  animation: floatUp linear infinite;
+  pointer-events: none;
+  user-select: none;
+  will-change: transform, opacity;
+}
+
+@keyframes floatUp {
+  0%   { transform: translateY(20vh) translateX(0) scale(0.6); opacity: 0; }
+  15%  { opacity: 1; }
+  85%  { opacity: 1; }
+  100% { transform: translateY(-110vh) translateX(40px) scale(1.1); opacity: 0; }
+}
+
+/* ============================================
+   GLASSMORPHISM CARD
+   ============================================ */
+.glass {
+  background: var(--glass-bg);
+  border: var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  backdrop-filter: blur(18px) saturate(140%);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+  border-radius: var(--radius);
+}
+
+/* ============================================
+   GLOW HEADINGS
+   ============================================ */
+.glow-text {
+  color: hsl(var(--love-white));
+  text-shadow: var(--glow-strong);
+}
+.glow-text-soft {
+  color: hsl(var(--love-pink));
+  text-shadow: var(--glow-soft);
+}
+.script {
+  font-family: 'Dancing Script', cursive;
+}
+
+/* ============================================
+   3D PHOTO TUNNEL
+   ============================================ */
+.tunnel {
+  perspective: 1400px;
+  perspective-origin: 50% 50%;
+}
+.photo-card {
+  width: var(--photo-size);
+  aspect-ratio: 4 / 5;
+  border-radius: 1.5rem;
+  overflow: hidden;
+  background: hsl(var(--muted));
+  border: 1px solid hsl(var(--love-pink) / 0.35);
+  box-shadow:
+    0 0 0 1px hsl(var(--love-white) / 0.05) inset,
+    0 0 40px hsl(var(--love-pink-glow) / 0.35),
+    0 30px 80px -20px hsl(var(--love-red) / 0.4);
+  transform-style: preserve-3d;
+  transition: transform 0.1s linear, filter 0.3s ease, opacity 0.3s ease;
+  will-change: transform, opacity, filter;
+}
+.photo-card img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+@media (max-width: 640px) {
+  :root { --photo-size: var(--photo-size-mobile); }
+}
+
+/* ============================================
+   PARTICLES
+   ============================================ */
+.particle {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle,
+    hsl(var(--love-pink) / 0.9),
+    hsl(var(--love-pink-glow) / 0.2) 60%,
+    transparent 70%);
+  filter: blur(1px);
+  pointer-events: none;
+  animation: drift linear infinite;
+}
+@keyframes drift {
+  0%   { transform: translate(0, 0); opacity: 0; }
+  10%  { opacity: 0.9; }
+  90%  { opacity: 0.9; }
+  100% { transform: translate(var(--dx, 40px), -120vh); opacity: 0; }
+}
+
+/* ============================================
+   GRADIENT BLOBS
+   ============================================ */
+.blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(90px);
+  opacity: 0.55;
+  pointer-events: none;
+  animation: blobPulse 9s ease-in-out infinite;
+}
+@keyframes blobPulse {
+  0%, 100% { transform: scale(1) translate(0,0); }
+  50%      { transform: scale(1.15) translate(20px, -20px); }
+}
+
+/* ============================================
+   SCROLL REVEAL
+   ============================================ */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.9s ease, transform 0.9s cubic-bezier(.2,.7,.2,1);
+}
+.reveal.in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ============================================
+   FLOATING LOVE NOTES
+   ============================================ */
+.love-note {
+  animation: noteFloat 6s ease-in-out infinite;
+}
+@keyframes noteFloat {
+  0%, 100% { transform: translateY(0) rotate(-2deg); }
+  50%      { transform: translateY(-14px) rotate(2deg); }
+}
+
+/* ============================================
+   HEART BEAT
+   ============================================ */
+.beat { animation: beat 1.4s ease-in-out infinite; display: inline-block; }
+@keyframes beat {
+  0%, 100% { transform: scale(1); }
+  20%      { transform: scale(1.25); }
+  40%      { transform: scale(0.95); }
+  60%      { transform: scale(1.15); }
+}
+
+/* ============================================
+   START SCREEN FADE
+   ============================================ */
+.start-fade-out {
+  animation: startOut 1.1s forwards cubic-bezier(.7,0,.3,1);
+}
+@keyframes startOut {
+  to { opacity: 0; transform: scale(1.15); filter: blur(20px); visibility: hidden; }
+}
+
+/* Hide scrollbar aesthetic but keep functionality */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--love-pink) / 0.4);
+  border-radius: 999px;
 }
